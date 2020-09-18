@@ -1,6 +1,7 @@
 CREATE TABLE redirects (
     id VARCHAR(36) PRIMARY KEY NOT NULL,
     redirect VARCHAR(2048) NOT NULL,
+    reason VARCHAR(255),
     created_on TIMESTAMP NOT NULL DEFAULT NOW()
 );
 

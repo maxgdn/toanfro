@@ -20,10 +20,10 @@ const getRedirect = async (uuid: string): Promise<Redirect> => {
     }
 }
 
-const createRedirect = async (to: string) => {
+const createRedirect = async (to: string, reason?: string) => {
     try {
         const uuid = await uuidv4();
-        const { rows } = await db.query('INSERT INTO redirects(id,redirect) VALUES($1,$2) RETURNING *', [uuid, to]);
+        const { rows } = await db.query('INSERT INTO redirects(id,redirect,reason) VALUES($1,$2,$3) RETURNING *', [uuid, to, reason]);
         console.log(rows[0]);
     } catch (error) {
 

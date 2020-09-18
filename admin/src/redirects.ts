@@ -20,9 +20,10 @@ const updateOneRedirect = async (id: string, redirect: string) => {
     });
 }
 
-const createOneRedirect = async (redirect: string) => {
+const createOneRedirect = async (redirect: string, reason?: string) => {
     await axios.post(`/redirect`, {
-        redirect: redirect
+        redirect: redirect,
+        reason: reason
     });
 }
 

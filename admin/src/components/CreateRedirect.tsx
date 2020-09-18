@@ -9,20 +9,31 @@ const Container = styled.div`
 
 const CreateRedirect: React.FC = () => {
     const [redirectName, setRedirectName] = useState("");
+    const [reason, setReason] = useState("");
     const send = () => {
         console.log("sending");
-        createOneRedirect(redirectName);
+        createOneRedirect(redirectName, reason);
     }
 
-    const handleChange = (event) => {
+    const handleRedirectChange = (event) => {
         console.log(event);
         setRedirectName(event.target.value);
     }
 
+    const handleReasonChange = (event) => {
+        console.log(event);
+        setReason(event.target.value);
+    }
+
     return (
         <Container>
-            <label>Create redirect </label>
-            <input type="text" name="redirect" onChange={handleChange}/>
+            <b>Create redirect </b>
+            <br/>
+            <div>Redirect URL</div>
+            <input type="text" name="redirect" onChange={handleRedirectChange}/>
+            <div>Reason</div>
+            <input type="text" name="reason" onChange={handleReasonChange}/>
+            <div/>
             <input type="submit" name="Submit" onClick={send}/>
         </Container>
     );

@@ -50,6 +50,7 @@ const Redirects: React.FC = () => {
             <RedirectTableRow>
                 <RedirectTableHeading>ID</RedirectTableHeading>
                 <RedirectTableHeading>Redirect</RedirectTableHeading>
+                <RedirectTableHeading>Reason</RedirectTableHeading>
                 <RedirectTableHeading>Date</RedirectTableHeading>
             </RedirectTableRow>
             </thead>
@@ -60,6 +61,7 @@ const Redirects: React.FC = () => {
                     <RedirectTableRow>
                         <RedirectTableData>{r.id}</RedirectTableData>
                         <RedirectTableData>{r.redirect}</RedirectTableData>
+                        <RedirectTableData>{r.reason}</RedirectTableData>
                         <RedirectTableData>{r.created_on}</RedirectTableData>
                     </RedirectTableRow>
                 );

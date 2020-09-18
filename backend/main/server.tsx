@@ -67,7 +67,8 @@ const getOne = async (ctx) => {
 const makeRedirect = async (ctx) => {
     console.log(ctx.request);
     const to = ctx.request.body.redirect;
-    await createRedirect(to);
+    const reason = ctx.request.body.reason;
+    await createRedirect(to, reason);
     ctx.status = 200;
 }
 
