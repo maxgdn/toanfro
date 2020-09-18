@@ -2,6 +2,7 @@ import * as React from 'react';
 import {useState, useEffect} from 'react';
 import styled from 'styled-components';
 import { getAllVisitors } from '../visitors';
+import DataModal from './DataModal';
 
 const VisitorsTable = styled.table`
     width: 100%;
@@ -61,7 +62,7 @@ const Visitors: React.FC = () => {
                 <VisitorsTableHeading>Browsers</VisitorsTableHeading>
                 <VisitorsTableHeading>Fingerprint</VisitorsTableHeading>
                 <VisitorsTableHeading>Headers</VisitorsTableHeading>
-                <VisitorsTableHeading>Ip Address</VisitorsTableHeading>
+                <VisitorsTableHeading>IP Address</VisitorsTableHeading>
                 <VisitorsTableHeading>Accessed on</VisitorsTableHeading>
             </VisitorsTableRow>
             </thead>
@@ -73,7 +74,7 @@ const Visitors: React.FC = () => {
                         <VisitorsTableData>{v.id}</VisitorsTableData>
                         <VisitorsTableData>{v.redirect_id}</VisitorsTableData>
                         <VisitorsTableData>{printObj(v.browser)}</VisitorsTableData>
-                        <VisitorsTableData>{printObj(v.fingerprint)}</VisitorsTableData>
+                        <VisitorsTableData><DataModal text={'open'} data={printObj(v.fingerprint)}/></VisitorsTableData>
                         <VisitorsTableData>{printObj(v.headers)}</VisitorsTableData>
                         <VisitorsTableData>{v.ip_addr}</VisitorsTableData>
                         <VisitorsTableData>{v.created_on}</VisitorsTableData>

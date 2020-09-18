@@ -8,6 +8,8 @@ const koaBody = require('koa-body');
 import {getRedirect, Redirect, selectAllRedirects, createRedirect, removeRedirect, modifyRedirect} from './redirect';
 import {Visitor, createVisitor, updateVisitorBrowserInfo, selectAllVisitors} from './visitor';
 
+import * as settings from '../settings.json';
+
 const appPublic = new Koa();
 const appPrivate = new Koa();
 
@@ -90,12 +92,18 @@ const allVisitors = async (ctx) => {
     ctx.status = 200;
 }
 
+const getSettings = async (ctx) => {
+    ctx.body = settings;
+    ctx.status = 200;
+}
+
 routerPrivate.get('/redirects', allRedirects)
             .get('/redirect/:id', getOne)
             .put('/redirect/:id', updateRedirect)
             .post('/redirect', makeRedirect)
             .delete('/redirect/:id', deleteRedirect)
             .get('/visitors', allVisitors)
+            .get('/settings', getSettings)
              
 
 appPublic.use(koaBody({ jsonLimit: '1mb'}));

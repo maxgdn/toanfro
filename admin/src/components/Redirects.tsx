@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 import CreateRedirect from './CreateRedirect';
 import { getAllRedirects } from '../redirects';
+import { getSettings } from '../settings';
 
 const RedirectTable = styled.table`
     width: 100%;
@@ -30,17 +31,23 @@ const RedirectTableData = styled.td`
 
 const Redirects: React.FC = () => {
     const [redirects, setRedirects] = useState([]);
+    const [settings, setSettings] = useState("");
  
     useEffect(() => {
         const populate = async () => {
             const result = await getAllRedirects();
-            console.log(result);
-            
+            const settings = await getSettings();
+
+            console.log(settings);
+
             setRedirects(result.data);
+            setSettings(settings.data);
         };
 
         populate();
     }, []);
+
+    console.log(settings);
 
     return (
         <>
@@ -52,6 +59,7 @@ const Redirects: React.FC = () => {
                 <RedirectTableHeading>Redirect</RedirectTableHeading>
                 <RedirectTableHeading>Reason</RedirectTableHeading>
                 <RedirectTableHeading>Date</RedirectTableHeading>
+                <RedirectTableHeading>Link</RedirectTableHeading>
             </RedirectTableRow>
             </thead>
 
@@ -63,6 +71,7 @@ const Redirects: React.FC = () => {
                         <RedirectTableData>{r.redirect}</RedirectTableData>
                         <RedirectTableData>{r.reason}</RedirectTableData>
                         <RedirectTableData>{r.created_on}</RedirectTableData>
+                        <RedirectTableData><span>{`${settings['domain']}/to/${r.id}`}</span></RedirectTableData>
                     </RedirectTableRow>
                 );
             })}
