@@ -43,8 +43,6 @@ interface DataModalTableProps {
     data: object[];
 }
 
-
-
 interface DataWrapperProps {
     data: string
 }
@@ -54,7 +52,7 @@ const DataWrapper: React.FC<DataWrapperProps> = (props) => {
 
     const giveData = () => {
         let range = document.createRange();
-        range.selectNode(refDiv.current); //changed here
+        range.selectNode(refDiv.current);
         window.getSelection().removeAllRanges(); 
         window.getSelection().addRange(range); 
         document.execCommand("copy");
