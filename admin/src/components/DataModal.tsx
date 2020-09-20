@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {useState, useEffect} from 'react';
 import styled from 'styled-components';
+import DataModalTable from './DataModalTable';
 
 interface DataModalProps {
     data: any;
@@ -46,7 +47,7 @@ const CloseButton = styled.span`
     }
 `;
 
-const OpenButton = styled.button`
+const OpenButton = styled.span`
 `;
 
 const DataModal: React.FC<DataModalProps> = (props) => {
@@ -58,7 +59,7 @@ const DataModal: React.FC<DataModalProps> = (props) => {
             <Modal open={open}>
                 <ModalContent>
                     <CloseButton onClick={() => setOpen(false)}>&times;</CloseButton>
-                    {props.data}
+                    <DataModalTable data={props.data}/>
                 </ModalContent>
             </Modal>
         </>

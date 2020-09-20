@@ -74,7 +74,7 @@ const Visitors: React.FC = () => {
                         <VisitorsTableData>{v.id}</VisitorsTableData>
                         <VisitorsTableData>{v.redirect_id}</VisitorsTableData>
                         <VisitorsTableData>{printObj(v.browser)}</VisitorsTableData>
-                        <VisitorsTableData><DataModal text={'open'} data={printObj(v.fingerprint)}/></VisitorsTableData>
+                        <VisitorsTableData><DataModal text={'open'} data={v.fingerprint.fingerprint}/></VisitorsTableData>
                         <VisitorsTableData>{printObj(v.headers)}</VisitorsTableData>
                         <VisitorsTableData>{v.ip_addr}</VisitorsTableData>
                         <VisitorsTableData>{v.created_on}</VisitorsTableData>
