@@ -68,7 +68,6 @@ const DataWrapper: React.FC<DataWrapperProps> = (props) => {
 }
 
 const DataModalTable: React.FC<DataModalTableProps> = (props) => {
-    console.log(props.data);
     return (
         <ModalTable>
             <thead>
@@ -78,15 +77,19 @@ const DataModalTable: React.FC<DataModalTableProps> = (props) => {
             </ModalTableRow>
             </thead>
             <ModalTableBody>
-            {props.data.map((d: any) => {
+            {Object.keys(props.data).map((k: any) => {
+                console.log('Map');
                 
-                let value = d.value;
-                value = JSON.stringify(value);
+                let value = props.data[k];
+                let str = JSON.stringify(value);
+
+                console.log(k);
+                console.log(value);
                 
                 return (
                     <ModalTableRow>
-                        <ModalTableData><DataWrapper data={d.key}/></ModalTableData>
-                        <ModalTableData><DataWrapper data={value}/></ModalTableData>
+                        <ModalTableData><DataWrapper data={k}/></ModalTableData>
+                        <ModalTableData><DataWrapper data={str}/></ModalTableData>
                     </ModalTableRow>
                 );
             })}

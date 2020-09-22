@@ -62,6 +62,7 @@ const Visitors: React.FC = () => {
                 <VisitorsTableHeading>Browsers</VisitorsTableHeading>
                 <VisitorsTableHeading>Fingerprint</VisitorsTableHeading>
                 <VisitorsTableHeading>Headers</VisitorsTableHeading>
+                <VisitorsTableHeading>Geo</VisitorsTableHeading>
                 <VisitorsTableHeading>IP Address</VisitorsTableHeading>
                 <VisitorsTableHeading>Accessed on</VisitorsTableHeading>
             </VisitorsTableRow>
@@ -74,8 +75,9 @@ const Visitors: React.FC = () => {
                         <VisitorsTableData>{v.id}</VisitorsTableData>
                         <VisitorsTableData>{v.redirect_id}</VisitorsTableData>
                         <VisitorsTableData>{printObj(v.browser)}</VisitorsTableData>
-                        <VisitorsTableData><DataModal text={'open'} data={v.fingerprint.fingerprint}/></VisitorsTableData>
+                        <VisitorsTableData><DataModal text={'open'} data={v.fingerprint.fingerprintFinal}/></VisitorsTableData>
                         <VisitorsTableData>{printObj(v.headers)}</VisitorsTableData>
+                        <VisitorsTableData><DataModal text={'open'} data={v.geo}/></VisitorsTableData>
                         <VisitorsTableData>{v.ip_addr}</VisitorsTableData>
                         <VisitorsTableData>{v.created_on}</VisitorsTableData>
                     </VisitorsTableRow>

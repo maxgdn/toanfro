@@ -9,6 +9,7 @@ interface Visitor {
     browser: any;
     fingerprint: any;
     headers: any;
+    geo: any;
     ip_addr: string;
     date: Date;
 }
@@ -29,7 +30,22 @@ const createVisitor = async (redirect_uuid: string, headers: any, ip_addr: strin
 
 const updateVisitorBrowserInfo = async (browser: any, fingerprint: any, uuid: string) => {
     try {
-        const { rows } = await db.query('UPDATE visitors SET browser=$1, fingerprint=$2 WHERE id=$3 RETURNING *', [browser,{fingerprint},uuid]);
+        console.log(fingerprint);
+        
+        
+        fingerprint = fingerprint.map((f: any) => {
+            let obj = {};
+            obj[f.key] = f.value;
+            return obj;
+        });
+
+        let fingerprintFinal = {};
+
+        for(let f of fingerprint) {
+            Object.assign(fingerprintFinal, f);
+        }
+
+        const { rows } = await db.query('UPDATE visitors SET browser=$1, fingerprint=$2 WHERE id=$3 RETURNING *', [browser,{fingerprintFinal},uuid]);
         if(rows.length > 0) {
             const visitor = rows[0];
 
