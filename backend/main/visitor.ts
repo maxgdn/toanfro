@@ -17,7 +17,6 @@ const createVisitor = async (redirect_uuid: string, headers: any, ip_addr: strin
     try {
         const uuid = await uuidv4();
         const { rows } = await db.query('INSERT INTO visitors(id,redirect_id,headers,ip_addr) VALUES($1,$2,$3,$4) returning id', [uuid, redirect_uuid,headers, ip_addr]);
-        console.log(rows);
         if(rows.length > 0) {
             return rows[0].id;
         } else {
@@ -44,13 +43,7 @@ const updateVisitorBrowserInfo = async (browser: any, fingerprint: any, uuid: st
 
 const updateVisitorGeoInfo = async (geo: any, uuid: string) => {
     try {
-        console.log("GEO");
-        console.log(geo);
-        console.log("UUID");
-        console.log(uuid);
         const { rows } = await db.query('UPDATE visitors SET geo=$1 WHERE id=$2 RETURNING *', [geo,uuid]);
-        console.log("Inserted");
-        console.log(rows[0]);
     } catch (error) {
         console.log(error);
     }

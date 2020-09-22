@@ -10,8 +10,6 @@ const queue = new Queue(qName);
 
 const worker = new Worker(qName, async (job) => {
     const visitor = job.data;
-    console.log("DATA");
-    console.log(visitor);
 
     switch(job.name) {
         case Processes.GEO:

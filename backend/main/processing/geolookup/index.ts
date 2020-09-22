@@ -42,15 +42,12 @@ const lookup = async (ip: string) => {
 
         return Object.assign({},asnFinal,geoFinal);
     } catch (error) {
-        console.log(error);
         return null;
     }
 }
 
 const run = async (uuid: string, ip: string) => {
     const result = await lookup(ip);
-    console.log(uuid);
-    console.log(ip);
     await updateVisitorGeoInfo(result, uuid);
 };
 
