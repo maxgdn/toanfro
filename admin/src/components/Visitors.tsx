@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {useState, useEffect} from 'react';
 import styled from 'styled-components';
+import Flag from 'react-world-flags'
 import { getAllVisitors } from '../visitors';
 import DataModal from './DataModal';
 
@@ -44,8 +45,6 @@ const Visitors: React.FC = () => {
     useEffect(() => {
         const populate = async () => {
             const result = await getAllVisitors();
-            console.log(result);
-            
             setVisitors(result.data);
         };
 
@@ -77,7 +76,7 @@ const Visitors: React.FC = () => {
                         <VisitorsTableData>{printObj(v.browser)}</VisitorsTableData>
                         <VisitorsTableData><DataModal text={'open'} data={v.fingerprint.fingerprintFinal}/></VisitorsTableData>
                         <VisitorsTableData>{printObj(v.headers)}</VisitorsTableData>
-                        <VisitorsTableData><DataModal text={'open'} data={v.geo}/></VisitorsTableData>
+                        <VisitorsTableData><DataModal text={<Flag code={v.geo.countryISO} fallback={ <span>Unknown</span> }/>} data={v.geo}/></VisitorsTableData>
                         <VisitorsTableData>{v.ip_addr}</VisitorsTableData>
                         <VisitorsTableData>{v.created_on}</VisitorsTableData>
                     </VisitorsTableRow>

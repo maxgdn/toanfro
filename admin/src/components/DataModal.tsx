@@ -5,7 +5,7 @@ import DataModalTable from './DataModalTable';
 
 interface DataModalProps {
     data: any;
-    text: string;
+    text: React.ReactNode;
 }
 
 interface ModalStyle {

@@ -66,6 +66,7 @@
   },
   "dependencies": {
     "axios": "^0.20.0",
+    "react-world-flags": "^1.4.0",
     "styled-components": "^5.2.0"
   }
 }
