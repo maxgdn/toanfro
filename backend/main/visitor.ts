@@ -1,5 +1,7 @@
 import db from './db';
 import { v4 as uuidv4 } from 'uuid';
+import {queue} from './processing/processing';
+import Processes from './processing/processes';
 
 interface Visitor {
     uuid: string;
@@ -28,8 +30,27 @@ const createVisitor = async (redirect_uuid: string, headers: any, ip_addr: strin
 
 const updateVisitorBrowserInfo = async (browser: any, fingerprint: any, uuid: string) => {
     try {
-        const { rows } = await db.query('UPDATE visitors SET browser=$1, fingerprint=$2 WHERE id=$3', [browser,{fingerprint},uuid]);
+        const { rows } = await db.query('UPDATE visitors SET browser=$1, fingerprint=$2 WHERE id=$3 RETURNING *', [browser,{fingerprint},uuid]);
+        if(rows.length > 0) {
+            const visitor = rows[0];
+
+            await queue.add(Processes.GEO, visitor);
+        } 
         
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+const updateVisitorGeoInfo = async (geo: any, uuid: string) => {
+    try {
+        console.log("GEO");
+        console.log(geo);
+        console.log("UUID");
+        console.log(uuid);
+        const { rows } = await db.query('UPDATE visitors SET geo=$1 WHERE id=$2 RETURNING *', [geo,uuid]);
+        console.log("Inserted");
+        console.log(rows[0]);
     } catch (error) {
         console.log(error);
     }
@@ -49,4 +70,4 @@ const selectAllVisitors = async () => {
 }
 
 
-export {Visitor, createVisitor, updateVisitorBrowserInfo, selectAllVisitors};
+export {Visitor, createVisitor, updateVisitorBrowserInfo, selectAllVisitors, updateVisitorGeoInfo};

@@ -11,6 +11,7 @@ CREATE TABLE visitors (
     browser JSON,
     fingerprint JSON,
     headers JSON NOT NULL,
+    geo JSON,
     ip_addr INET NOT NULL,
     created_on TIMESTAMP NOT NULL DEFAULT NOW()
 );
